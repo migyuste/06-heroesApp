@@ -1,1 +1,7 @@
-<p>search-page works!</p>
+<div class="d-flex flex-column p-2">
+  <h1>Buscador</h1>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Buscador de héroes</mat-label>
+    <input matInput type="text" [formControl]="searchInput" />
+  </mat-form-field>
+</div>
