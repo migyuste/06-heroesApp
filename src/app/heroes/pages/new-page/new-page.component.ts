@@ -3,9 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-new-page',
   templateUrl: './new-page.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class NewPageComponent {
-
+  public publishers = [
+    { id: 'DC Comics', value: 'DC - Comics' },
+    { id: 'Marvel Comics', value: 'Marvel - Comics' },
+  ];
 }
