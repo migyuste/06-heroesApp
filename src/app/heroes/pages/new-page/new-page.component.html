@@ -7,47 +7,57 @@
   <div class="col-12 sm:col-6">
     <mat-card>
       <mat-card-content>
-        <div class="grid">
+        <form class="grid" [formGroup]="heroForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline" class="col-12 sm:col-6">
             <mat-label>Superhéroe</mat-label>
-            <input matInput type="text" required />
+            <input matInput type="text" required formControlName="superhero" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-12 sm:col-6">
             <mat-label>Alter ego</mat-label>
-            <input matInput type="text" required />
+            <input matInput type="text" required formControlName="alter_ego" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-12">
             <mat-label>Primera aparición</mat-label>
-            <input matInput type="text" required />
+            <input
+              matInput
+              type="text"
+              required
+              formControlName="first_appearance"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-12">
             <mat-label>Personajes</mat-label>
-            <input matInput type="text" required />
+            <input matInput type="text" required formControlName="characters" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-12">
             <mat-label>Creador</mat-label>
-            <mat-select required="">
+            <mat-select required formControlName="publisher">
               <mat-option
                 *ngFor="let publisher of publishers"
                 [value]="publisher.id"
-                >{{ publisher.value }}</mat-option
               >
+                {{ publisher.value }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
+          <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Alternative image</mat-label>
+            <input matInput type="text" formControlName="alt_img" />
+          </mat-form-field>
+        </form>
         <div class="flex justify-content-between">
-            <button mat-flat-button color="warn">Borrar</button>
-            <button mat-flat-button color="primary">
-              <mat-icon>save</mat-icon>
-              Guardar
-            </button>
+          <button mat-flat-button color="warn">Borrar</button>
+          <button mat-flat-button color="primary" (click)="onSubmit()">
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="col-12 sm:col-6">
     <mat-card>
-        <img src="" alt="Imágen del héroe" matCardImage>
+      <img src="" alt="Imágen del héroe" matCardImage />
     </mat-card>
   </div>
 </div>
