@@ -171,10 +171,19 @@
       "id": "a8fcoQD",
       "superhero": "Superlópez",
       "publisher": "Marvel Comics",
-      "alter_ego": "Miguel",
+      "alter_ego": "Luis",
       "first_appearance": "Ibañez",
       "characters": "López",
       "alt_img": "https://mediaproxy.tvtropes.org/width/350/https://static.tvtropes.org/pmwiki/pub/images/superlopez-1.jpg"
+    },
+    {
+      "id": "PG6amlA",
+      "superhero": "123",
+      "publisher": "DC Comics",
+      "alter_ego": "123",
+      "first_appearance": "123",
+      "characters": "123",
+      "alt_img": ""
     }
   ]
 }

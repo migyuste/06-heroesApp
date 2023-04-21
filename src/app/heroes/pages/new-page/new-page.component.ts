@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { switchMap } from 'rxjs';
@@ -30,7 +32,8 @@ export class NewPageComponent implements OnInit {
   constructor(
     private heroesService: HeroesService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   get currentHero(): Hero {
@@ -40,25 +43,32 @@ export class NewPageComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.router.url.includes('edit')) return;
-    this.activatedRoute.params.pipe(
-      switchMap(({ id }) => this.heroesService.getHeroById(id))
-    ).subscribe(hero => {
-      if (!hero) return this.router.navigateByUrl('/');
-      this.heroForm.reset(hero);
-      return;
-    })
+    this.activatedRoute.params
+      .pipe(switchMap(({ id }) => this.heroesService.getHeroById(id)))
+      .subscribe((hero) => {
+        if (!hero) return this.router.navigateByUrl('/');
+        this.heroForm.reset(hero);
+        return;
+      });
   }
 
   onSubmit(): void {
     if (this.heroForm.invalid) return;
     if (this.currentHero.id) {
       this.heroesService.updateHero(this.currentHero).subscribe((hero) => {
-        // TODO: Mostrar snackbar
+        this.showSnackBar(`${hero.superhero} updated!`);
       });
       return;
     }
     this.heroesService.addHero(this.currentHero).subscribe((hero) => {
-      // TODO: Mostrar snackbar y navegar a heroes/edit/ hero.id
+      this.router.navigate(['/heroes/edit/', hero.id]);
+      this.showSnackBar(`${hero.superhero} created!`)
+    });
+  }
+
+  showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Done', {
+      duration: 10000,
     });
   }
 }
