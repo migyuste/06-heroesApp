@@ -21,19 +21,20 @@ export class AuthService {
   login(email: string, password: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/users/1`).pipe(
       tap((user) => (this.user = user)),
-      tap((user) => localStorage.setItem('token', '2312312312.213123123.1231434234'))
+      tap((user) =>
+        localStorage.setItem('token', '2312312312.213123123.1231434234')
+      )
     );
   }
 
-  checkAuthentication(): Observable<boolean> | boolean {
-    if (!localStorage.getItem('token')) return false;
+  checkAuthentication(): Observable<boolean> {
+    if (!localStorage.getItem('token')) return of(false);
     const token = localStorage.getItem('token');
-    return this.http.get<User>(`${this.baseUrl}/users/1`)
-      .pipe(
-        tap(user => this.user = user),
-        map(user => !!user),
-        catchError( err => of(false) )
-      )
+    return this.http.get<User>(`${this.baseUrl}/users/1`).pipe(
+      tap((user) => (this.user = user)),
+      map((user) => !!user),
+      catchError((err) => of(false))
+    );
   }
 
   logout() {
